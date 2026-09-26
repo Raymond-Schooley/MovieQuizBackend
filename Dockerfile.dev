@@ -1,0 +1,12 @@
+# Development image: runs the app straight from source with Maven, so it
+# picks up code changes on restart (spring-boot-devtools triggers a fast
+# in-JVM restart when files under /app/target/classes change). Used by
+# docker-compose.dev.yml, which bind-mounts the backend source into /app.
+
+FROM maven:3.9.9-eclipse-temurin-21
+WORKDIR /app
+
+# The Maven local repository is mounted as a named volume by
+# docker-compose.dev.yml so dependencies survive container restarts
+# instead of re-downloading every time.
+ENTRYPOINT ["mvn", "spring-boot:run"]
