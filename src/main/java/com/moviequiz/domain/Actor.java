@@ -30,6 +30,10 @@ public class Actor {
     @Column(name = "death_year")
     private Integer deathYear;
 
+    /** 'm' or 'f' as recorded by IMDb; null when unknown. */
+    @Column(columnDefinition = "CHAR(1)")
+    private Character gender;
+
     @Builder.Default
     @OneToMany(mappedBy = "actor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MovieActor> filmography = new ArrayList<>();
